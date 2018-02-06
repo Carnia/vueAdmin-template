@@ -1,0 +1,66 @@
+一、apache部署：
+1：官网下载[ Apache 2.4 VC11 ]：https://www.apachehaus.com/cgi-bin/download.plx#APACHE24VC11
+	PS：需要先装C++2015库，如果是VC14 需要另一个库，这里演示VC11
+2：解压到目录比如D:\Apache24，目录下就是bin等子目录
+3：打开D:\Apache24\conf\httpd.conf
+	3.1将${SRVROOT}全局替换成"D:/Apache24"(注意反斜杠)
+	3.2如果需要改端口，"Listen 80"搜索修改
+	3.3如果需要虚拟主机，搜索"ServerName localhost:80"后面的"<Directory />",将标签内的值改为
+		AllowOverride all
+		Require all granted
+4：如果需要虚拟主机，打开D:\Apache24\conf\extra\httpd-vhosts.conf
+	4.1添加如下字段：(D:\APP为自定义路径，存放前端项目，ServerName自定义，并需要在host文件修改，PS："<Directory "D:/APP"> <Directory>"标签可以不要，也不完整，没深入修改了)
+		<VirtualHost *:80>
+		  DocumentRoot "D:/APP"
+		  ServerName m.local.cc
+		  ServerAlias m.local.cc
+		  ErrorLog "logs/m.local.cc-error.log"
+		  CustomLog "logs/m.local.cc-access.log" common
+		  <Directory "D:/APP"> 
+		  	#这里的Indexes代表能访问根目录，不加就不能访问根目录
+		    Options Indexes FollowSymLinks
+		    DirectoryIndex index.html index.php
+		  </Directory>
+		</VirtualHost>
+5：如果需要虚拟主机，继续打开C:\Windows\System32\drivers\etc\hosts
+	添加如下字段
+	127.0.0.1	m.local.cc
+	127.0.0.1	CMS.local.cc
+	127.0.0.1	CMC.local.cc
+	127.0.0.1	CMB.local.cc
+6：额外内容：vue history模式，并且存在二级目录
+	6.1在项目根目录D:\APP新建文件".htaccess",内容为：
+	<IfModule mod_rewrite.c>
+	  Options +FollowSymlinks
+	  RewriteEngine On
+
+	  #CMS项目404转向index.html重写
+	  RewriteCond %{REQUEST_URI} ^/(CMS|CMS/.*)$
+	  RewriteRule ^/CMS/index\.html$ - [L,NC]
+	  
+	  RewriteCond %{REQUEST_FILENAME} !-d
+	  RewriteCond %{REQUEST_FILENAME} !-f
+	  RewriteRule ^(CMS|CMS/.*)$ CMS/index.html [L]
+
+	  #CMC项目404转向index.html重写
+	  RewriteCond %{REQUEST_URI} ^/(CMC|CMC/.*)$
+	  RewriteRule ^/CMC/index\.html$ - [L,NC]
+	  
+	  RewriteCond %{REQUEST_FILENAME} !-d
+	  RewriteCond %{REQUEST_FILENAME} !-f
+	  RewriteRule ^(CMC|CMC/.*)$ CMC/index.html [L]
+	</IfModule>
+	目的是将链接请求如：m.local.cc/CMS/dashbord之类并不存在真实资源的地址指向真正的D:\APP\CMS\index.html,D:\APP\下有多个项目就配置多项。
+	6.2为了让apache读取".htaccess"，需要打开D:\Apache24\conf\httpd.conf:
+		6.2.1 搜索"Options Indexes FollowSymLinks"后面的AllowOverride,将值改为AllowOverride all
+		6.2.2 搜索mod_rewrite,将前面的#去掉，这是启用apache重写模块
+
+二、Vue项目部署（如果是histroy模式，且存在二级目录）
+1：config/index.js中，assetsPublicPath的值要改为“/二级目录名称/”，比如"/CMS/",项目放在D:\APP\CMS下。
+2：路由配置：
+	export default new Router({
+	  mode: 'history', // 后端支持可开
+	  base: 'CMS',//对应url地址栏CMS
+	  routes:[...,{ path: '*', redirect: '/404', hidden: true }]//并且接管所有404页面
+	  ...,
+	})
