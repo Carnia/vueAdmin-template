@@ -5,6 +5,7 @@
 **Live demo:** http://panjiachen.github.io/vueAdmin-template
 
 [中文文档](https://github.com/PanJiaChen/vueAdmin-template/blob/master/README-zh.md)
+[mock数据地址](https://easy-mock.com/project/5a653ea3fc1b280416439b0a)
 
 ## Build Setup
 
