@@ -1,4 +1,4 @@
-# vueAdmin-template
+# vueAdmin-template cloned from panjiachen
 
 > A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
 
