@@ -2,10 +2,11 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
-    <el-dropdown class="avatar-container" trigger="click">
+    <el-dropdown class="avatar-container" trigger="click" placement="bottom-start">
       <div class="avatar-wrapper">
-        <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
+        <span v-text="name" class="name"></span>
         <i class="el-icon-caret-bottom"></i>
+        <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
         <router-link class="inlineBlock" to="/">
@@ -34,7 +35,8 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'avatar',
+      'name'
     ])
   },
   methods: {
@@ -75,17 +77,22 @@ export default {
     .avatar-wrapper {
       cursor: pointer;
       margin-top: 5px;
+      height: 45px;
       position: relative;
       .user-avatar {
         width: 40px;
         height: 40px;
         border-radius: 10px;
       }
+      .name{
+        display: inline-block;
+        vertical-align: top;
+        line-height: 45px;
+      }
       .el-icon-caret-bottom {
-        position: absolute;
-        right: -20px;
-        top: 25px;
         font-size: 12px;
+        vertical-align: top;
+        line-height: 45px;
       }
     }
   }
