@@ -79,6 +79,14 @@ export default new Router({
   mode: 'history', // 后端支持可开
   base: '/CMS/',
   scrollBehavior: () => ({ y: 0 }),
+  // scrollBehavior(to, from, savedPosition) {
+  //   console.log(arguments)
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   } else {
+  //     return { x: 0, y: 0 }
+  //   }
+  // },
   routes: constantRouterMap
 })
 

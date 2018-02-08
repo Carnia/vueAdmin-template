@@ -2,23 +2,25 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
-    <el-dropdown class="avatar-container" trigger="click" placement="bottom-start">
-      <div class="avatar-wrapper">
-        <span v-text="name" class="name"></span>
-        <i class="el-icon-caret-bottom"></i>
-        <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
-      </div>
-      <el-dropdown-menu class="user-dropdown" slot="dropdown">
-        <router-link class="inlineBlock" to="/">
-          <el-dropdown-item>
-            Home
+    <el-tooltip :content="roles.toString()" placement="left" effect="light">
+      <el-dropdown class="avatar-container" trigger="click" placement="bottom-start">
+        <div class="avatar-wrapper">
+          <span v-text="name" class="name"></span>
+          <i class="el-icon-caret-bottom"></i>
+          <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
+        </div>
+        <el-dropdown-menu class="user-dropdown" slot="dropdown">
+          <router-link class="inlineBlock" to="/">
+            <el-dropdown-item>
+              Home
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided>
+            <span @click="logout" style="display:block;">LogOut</span>
           </el-dropdown-item>
-        </router-link>
-        <el-dropdown-item divided>
-          <span @click="logout" style="display:block;">LogOut</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </el-tooltip>
   </el-menu>
 </template>
 
@@ -36,7 +38,8 @@ export default {
     ...mapGetters([
       'sidebar',
       'avatar',
-      'name'
+      'name',
+      'roles'
     ])
   },
   methods: {

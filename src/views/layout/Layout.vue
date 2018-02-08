@@ -4,19 +4,21 @@
     <div class="main-container">
       <navbar></navbar>
       <app-main></app-main>
+      <Trademark></Trademark>
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from '@/views/layout/components'
+import { Navbar, Sidebar, AppMain, Trademark } from '@/views/layout/components'
 
 export default {
   name: 'layout',
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    Trademark
   },
   computed: {
     sidebar() {
