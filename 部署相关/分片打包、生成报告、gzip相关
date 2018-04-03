@@ -8,4 +8,4 @@ npm run build --report  打开报告服务器查看Webpack Bundle Analyzer结果
 3、gzip
 webpack.prod.conf.js 125行+  关键字BundleAnalyzerPlugin
 
-2、3相关设置在config/index.js中有开关
+2、3相关设置在config/index.js中有开关..
