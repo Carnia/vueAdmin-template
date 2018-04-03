@@ -1,0 +1,11 @@
+1、分片打包
+webpack.prod.conf.js 80行+  关键字CommonsChunkPlugin
+
+2、查看报告
+webpack.prod.conf.js 136行+  关键字CompressionWebpackPlugin
+npm run build --report  打开报告服务器查看Webpack Bundle Analyzer结果
+
+3、gzip
+webpack.prod.conf.js 125行+  关键字BundleAnalyzerPlugin
+
+2、3相关设置在config/index.js中有开关
