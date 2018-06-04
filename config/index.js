@@ -50,15 +50,15 @@ module.exports = {
   build: {
     // Template for index.html
     // index: path.resolve(__dirname, '../dist/index.html'),
-    index: path.resolve(__dirname, "../../../App/CMS/index.html"),
+    index: path.resolve(__dirname, "../../../work/vueDemo/index.html"),
 
     // Paths
     // assetsRoot: path.resolve(__dirname, "../dist"),
-    assetsRoot: path.resolve(__dirname, "../../../App/CMS/"),
+    assetsRoot: path.resolve(__dirname, "../../../work/vueDemo/"),
     assetsSubDirectory: "static",
 
     // you can set by yourself according to actual condition
-    assetsPublicPath: "/CMS/",
+    assetsPublicPath: "/vueDemo/",
 
     /**
      * Source Maps

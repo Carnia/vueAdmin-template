@@ -78,7 +78,7 @@ export const constantRouterMap = [
 
 export default new Router({
   mode: 'history', // 后端支持可开
-  base: '/CMS/', // 链接host后面的固定格式，这里是m.local.cc/CMS/...，之后才是路由变化内容
+  base: '/vueDemo/', // 链接host后面的固定格式，这里是m.local.cc/CMS/...，之后才是路由变化内容
   // scrollBehavior: () => ({ y: 0 }),
   // saveScrollPosition: true, // 记住页面位置
   // scrollBehavior(to, from, savedPosition) {
